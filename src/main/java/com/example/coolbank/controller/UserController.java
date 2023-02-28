@@ -4,6 +4,7 @@ import com.example.coolbank.domain.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 public interface UserController {
 
@@ -11,5 +12,5 @@ public interface UserController {
     User getUserById(@PathVariable("userId") Long userId);
 
     @PostMapping("/user")
-    User saveUser(User user);
+    User saveUser(@RequestBody User user);
 }
