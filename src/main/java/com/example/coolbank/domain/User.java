@@ -1,8 +1,12 @@
 package com.example.coolbank.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.ToString;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,6 +17,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "USERS")
+@ToString(exclude = "accounts")
 public class User {
 
     @Id
@@ -34,7 +39,8 @@ public class User {
     @Column(name = "LAST_NAME")
     private String lastName;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Set<Account> accounts;
 
     public User() {

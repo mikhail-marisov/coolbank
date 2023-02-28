@@ -1,5 +1,8 @@
 package com.example.coolbank.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -31,8 +34,9 @@ public class Account {
     @Column(name = "ACCOUNT_NUMBER")
     private Long accountNumber;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "USER_ID")
+    @JsonBackReference
     private User user;
 
     public Account() {
