@@ -1,6 +1,7 @@
 package com.example.coolbank.controller.impl;
 
 import com.example.coolbank.controller.UserController;
+import com.example.coolbank.domain.Account;
 import com.example.coolbank.domain.User;
 import com.example.coolbank.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/v1/")
@@ -35,5 +38,13 @@ public class UserControllerImpl implements UserController {
     public User saveUser(@RequestBody User user) {
         userService.saveUser(user);
         return userService.getById(user.getId());
+    }
+
+    @Override
+    @GetMapping("/{userId}/accounts")
+    @ResponseStatus(HttpStatus.OK)
+    public Set<Account> getUserAccountsByUserId(@PathVariable("userId") Long userId) {
+
+        return userService.getUserAccountsByUserId(userId);
     }
 }

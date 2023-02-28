@@ -1,9 +1,12 @@
 package com.example.coolbank.service.impl;
 
+import com.example.coolbank.domain.Account;
 import com.example.coolbank.domain.User;
 import com.example.coolbank.repository.UserRepository;
 import com.example.coolbank.service.UserService;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -23,5 +26,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getById(Long id) {
         return userRepository.findById(id).get();
+    }
+
+    @Override
+    public Set<Account> getUserAccountsByUserId(Long id) {
+
+        User user = userRepository.findById(id).get();
+        return user.getAccounts();
     }
 }
