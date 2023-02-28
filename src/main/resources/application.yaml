@@ -9,3 +9,5 @@ spring:
   liquibase:
     change-log: db/changelog/db.changelog-master.yaml
     enabled: true
+server:
+  port: ${COOLBANK_PORT:8089}
